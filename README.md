@@ -1,0 +1,1 @@
+Welcome to BBBalatro! A fun little mod that is trying to add a bunch of jokers to balatro, for fun! Thats all you really need to know, read the credits, update steamodded if you need to, tell me about bugs if they appear, and enjoy!
