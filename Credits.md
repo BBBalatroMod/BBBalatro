@@ -18,7 +18,11 @@ Blizzow (again) for helping me code (a big thank you),
 AgentCheese for letting me borrow his joker idea (stoner),
 GayCoonie for coming up with joker ideas and helping me set up a github page (thief).
 
-Emotional support credits (everyone else who followed my journey of coding) -
+Testing Credits (people who are reporting / reported bugs in the code) -
+GayCoonie (again),
+humplydinkle.
+
+Emotional support Credits (everyone else who followed my journey of coding) -
 CoolDude,
 Jay,
 Jet,
