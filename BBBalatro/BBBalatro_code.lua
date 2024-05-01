@@ -12,7 +12,7 @@ local jokers = {
         name = "Bald Joker",                                --name used by the joker
         text = {
             "{C:mult}+2 mult{} for every scored card",             --description text.		
-            "without an {C:attention}enhancment{}",         --you can add as many lines as you want
+            "without an {C:attention}enhancement{}",         --you can add as many lines as you want
             "{C:inactive}(jonkler){}"                       --more than 5 lines look odd
         },
         config = { extra = { mult = 0, x_mult = 0 } }, --variables used for abilities and effects.
@@ -49,8 +49,8 @@ local jokers = {
     wokerjoker = {                                 --slug used by the joker.
         name = "Woker",                            --name used by the joker
         text = {
-            "All scored {C:attention}face{} cards", --description text.		
-            "become {C:attention}queens{}",        --you can add as many lines as you want
+            "All scored {C:attention}Face{} cards", --description text.		
+            "become {C:attention}Queens{}",        --you can add as many lines as you want
             "{C:inactive}(jonkler){}"              --more than 5 lines look odd
         },
         config = { extra = { mult = 0, x_mult = 0 } }, --variables used for abilities and effects.
@@ -84,7 +84,7 @@ local jokers = {
     brokejoker = {                                     --slug used by the joker.
         name = "Broker",                                --name used by the joker
         text = {
-            "gives {C:mult}X2 Mult{} if",               --description text.		
+            "gives {X:red,C:white}X2 Mult{} if",               --description text.		
             "you have {C:money}0${} or less", --you can add as many lines as you want
             "{C:inactive}(jonkler){}"                   --more than 5 lines look odd
         },
@@ -165,8 +165,7 @@ local jokers = {
     strokejoker = {                                     --slug used by the joker.
         name = "Stroker",                                --name used by the joker
         text = {
-            "{C:mult}X0.5-2 mult{}",               --description text.		
-            "{C:inactive}rand(){}", --you can add as many lines as you want
+            "{X:red,C:white}X0.5-2 mult{}",               --description text.		
             "{C:inactive}(jonkler){}"                   --more than 5 lines look odd
         },
         config = { extra = { mult = 0, x_mult = 0, min = 5, max = 20 } },  --variables used for abilities and effects.
@@ -198,7 +197,7 @@ local jokers = {
         name = "Binary",                                --name used by the joker
         text = {
             "{C:green}#4# in #3#{} chance of",               --description text.		
-            "{C:mult}X2 mult{} whenever a {C:attention}10{} is played", --you can add as many lines as you want
+            "{X:red,C:white}X2 mult{} whenever a {C:attention}10{} is played", --you can add as many lines as you want
             "{C:inactive}(jonkler){}"                   --more than 5 lines look odd
         },
         config = { extra = { mult = 0, x_mult = 2, odds = 2, normal = 1 } },  --variables used for abilities and effects.
@@ -239,7 +238,7 @@ local jokers = {
         },
         config = { extra = { mult = 0, x_mult = 2 } },  --variables used for abilities and effects.
         pos = { x = 0, y = 0 },                         --pos in spirtesheet 0,0 for single sprites or the first sprite in the spritesheet
-        rarity = 1,                                     --rarity 1=common, 2=uncommen, 3=rare, 4=legendary
+        rarity = 2,                                     --rarity 1=common, 2=uncommen, 3=rare, 4=legendary
         cost = 4,                                       --cost to buy the joker in shops
         blueprint_compat = true,                        --doses joker work with blueprint
         eternal_compat = true,                          --can joker be eternal
@@ -324,11 +323,11 @@ local jokers = {
 
         calculate = function(self, context)             --define calculate functions here
             if SMODS.end_calculate_context(context) then
-                self.ability.extra.mult = self.ability.extra.mult + 5
+                self.ability.extra.mult = (self.ability.extra.mult + 5) or 0
                 return {
-                    mult_mod = self.ability.extra.mult - 5,
+                    mult_mod = (self.ability.extra.mult - 5) or 0,
                     card = self,
-                    message = localize { type = 'variable', key = 'a_mult', vars = { self.ability.extra.mult - 5 } },
+                    message = localize { type = 'variable', key = 'a_mult', vars = { (self.ability.extra.mult - 5) or 0 } },
                 }
             elseif context.end_of_round and not context.individual and not context.repetition and not context.blueprint then
                 self.ability.extra.mult = 5
@@ -475,7 +474,7 @@ local jokers = {
     thiefjoker = {                                     --slug used by the joker.
         name = "Thief",                                --name used by the joker
         text = {
-            "gains {C:mult}+X0.2 mult{} every played hand",               --description text.	
+            "gains {X:red,C:white}+X0.2 mult{} every played hand",               --description text.	
             "{C:money}-3${} every played hand", --you can add as many lines as you want
             "{C:inactive}(currently gives X#2# mult){}",
             "{C:inactive}(jonkler){}"                   --more than 5 lines look odd
@@ -526,15 +525,12 @@ local jokers = {
         soul_pos = nil,                                 --pos of a soul sprite.
 
         calculate = function(self, context)             --define calculate functions here
-            if self.ability.extra.chips == nil then
-                self.ability.extra.chips = 0
-            end
             if SMODS.end_calculate_context(context) then
-                self.ability.extra.chips = hand_chips
+                self.ability.extra.chips = hand_chips or 0
                 return {
-                    chip_mod = self.ability.extra.chips*self.ability.extra.chips - hand_chips,
+                    chip_mod = (self.ability.extra.chips*self.ability.extra.chips - hand_chips) or 0,
                     card = self,
-                    message = localize { type = 'variable', key = 'a_chips_minus', vars = { self.ability.extra.chips*self.ability.extra.chips } }
+                    message = localize { type = 'variable', key = 'a_chips_minus', vars = { (self.ability.extra.chips*self.ability.extra.chips) or 0 } }
                 }
             end
         end,
@@ -547,14 +543,14 @@ local jokers = {
     outlinejoker = {                                     --slug used by the joker.
         name = "Outline",                                --name used by the joker
         text = {
-            "If played hanad is 1 {C:attention}wild{} card,",               --description text.	
+            "If played hand is 1 {C:attention}wild{} card,",               --description text.	
             "{C:attention}split{} it into the {C:attention}4{} suits",
             "{C:inactive}(jonkler){}"                   --more than 5 lines look odd
         },
         config = { extra = { mult = 0, x_mult = 1.2, card_tally = 0 } },  --variables used for abilities and effects.
         pos = { x = 0, y = 0 },                         --pos in spirtesheet 0,0 for single sprites or the first sprite in the spritesheet
-        rarity = 3,                                     --rarity 1=common, 2=uncommen, 3=rare, 4=legendary
-        cost = 16,                                       --cost to buy the joker in shops
+        rarity = 2,                                     --rarity 1=common, 2=uncommen, 3=rare, 4=legendary
+        cost = 5,                                       --cost to buy the joker in shops
         blueprint_compat = false,                        --doses joker work with blueprint
         eternal_compat = true,                          --can joker be eternal
         unlocked = true,                                --joker is unlocked by default
@@ -641,6 +637,139 @@ local jokers = {
 
         loc_def = function(self) --defines variables to use in the UI. you can use #1# for example to show the mult variable, and #2# for x_mult
             return { self.ability.extra.mult, self.ability.extra.x_mult, self.ability.extra.card_tally }
+        end
+    },
+
+    rajoker = {                                     --slug used by the joker.
+        name = "Ra joker",                                --name used by the joker
+        text = {
+            "Gives {C:chips}chip{} value as {C:mult}mult{}",               --description text.	
+            "{C:inactive}(jonkler){}"                   --more than 5 lines look odd
+        },
+        config = { extra = { mult = 0, x_mult = 1.2 } },  --variables used for abilities and effects.
+        pos = { x = 0, y = 0 },                         --pos in spirtesheet 0,0 for single sprites or the first sprite in the spritesheet
+        rarity = 3,                                     --rarity 1=common, 2=uncommen, 3=rare, 4=legendary
+        cost = 9,                                       --cost to buy the joker in shops
+        blueprint_compat = true,                        --doses joker work with blueprint
+        eternal_compat = true,                          --can joker be eternal
+        unlocked = true,                                --joker is unlocked by default
+        discovered = true,                              --joker is discovered by default
+        atlas = nil,                                    --defines the atlas that you want to use for the sprite sheet. atlas=nil if you want to use single sprites
+        soul_pos = nil,                                 --pos of a soul sprite.
+
+        calculate = function(self, context)             --define calculate functions here
+            if SMODS.end_calculate_context(context) then
+                return {
+                    mult_mod = hand_chips,
+                    card = self,
+                    message = localize { type = 'variable', key = 'a_chips_minus', vars = { hand_chips } }
+                }
+            end
+        end,
+
+        loc_def = function(self) --defines variables to use in the UI. you can use #1# for example to show the mult variable, and #2# for x_mult
+            return { self.ability.extra.mult, self.ability.extra.x_mult }
+        end
+    },
+
+    sandjoker = {                                     --slug used by the joker.
+        name = "Sand joker",                                --name used by the joker
+        text = {
+            "gains {C:mult}4 mult{} every {C:blue}hand{} played,",               --description text.	
+            "{C:inactive}(currently gives #1# mult){}",
+            "{C:inactive}(jonkler){}"                   --more than 5 lines look odd
+        },
+        config = { extra = { mult = -20, x_mult = 1.2 } },  --variables used for abilities and effects.
+        pos = { x = 0, y = 0 },                         --pos in spirtesheet 0,0 for single sprites or the first sprite in the spritesheet
+        rarity = 3,                                     --rarity 1=common, 2=uncommen, 3=rare, 4=legendary
+        cost = 5,                                       --cost to buy the joker in shops
+        blueprint_compat = true,                        --doses joker work with blueprint
+        eternal_compat = true,                          --can joker be eternal
+        unlocked = true,                                --joker is unlocked by default
+        discovered = true,                              --joker is discovered by default
+        atlas = nil,                                    --defines the atlas that you want to use for the sprite sheet. atlas=nil if you want to use single sprites
+        soul_pos = nil,                                 --pos of a soul sprite.
+
+        calculate = function(self, context)             --define calculate functions here
+            if SMODS.end_calculate_context(context) then
+                self.ability.extra.mult = self.ability.extra.mult + 4
+                return {
+                    mult_mod = self.ability.extra.mult-4,
+                    card = self,
+                    message = localize { type = 'variable', key = 'a_mult', vars = { self.ability.extra.mult-4 } }
+                }
+            end
+        end,
+
+        loc_def = function(self) --defines variables to use in the UI. you can use #1# for example to show the mult variable, and #2# for x_mult
+            return { self.ability.extra.mult, self.ability.extra.x_mult }
+        end
+    },
+
+    sphinxjoker = {                                     --slug used by the joker.
+        name = "Sphinx",                                --name used by the joker
+        text = {
+            "{C:attention}Stone{} cards retrigger",               --description text.	
+            "{C:inactive}(jonkler){}"                   --more than 5 lines look odd
+        },
+        config = { extra = { mult = -20, x_mult = 1.2 } },  --variables used for abilities and effects.
+        pos = { x = 0, y = 0 },                         --pos in spirtesheet 0,0 for single sprites or the first sprite in the spritesheet
+        rarity = 2,                                     --rarity 1=common, 2=uncommen, 3=rare, 4=legendary
+        cost = 5,                                       --cost to buy the joker in shops
+        blueprint_compat = true,                        --doses joker work with blueprint
+        eternal_compat = true,                          --can joker be eternal
+        unlocked = true,                                --joker is unlocked by default
+        discovered = true,                              --joker is discovered by default
+        atlas = nil,                                    --defines the atlas that you want to use for the sprite sheet. atlas=nil if you want to use single sprites
+        soul_pos = nil,                                 --pos of a soul sprite.
+
+        calculate = function(self, context)             --define calculate functions here
+            if context.repetition then
+                 if context.cardarea == G.play then
+                    if context.other_card.ability.effect == "Stone Card" then
+                        return {
+                            message = localize('k_again_ex'),
+                            repetitions = 1,
+                            card = self
+                        }
+                    end
+                end
+            end
+        end,
+
+        loc_def = function(self) --defines variables to use in the UI. you can use #1# for example to show the mult variable, and #2# for x_mult
+            return { self.ability.extra.mult, self.ability.extra.x_mult }
+        end
+    },
+
+    yellowjoker = {                                     --slug used by the joker.
+        name = "Yellow joker",                                --name used by the joker
+        text = {
+            "after each {C:attention}blind{}, set money to {C:money}14${}",               --description text.	
+            "{C:inactive}(jonkler){}"                   --more than 5 lines look odd
+        },
+        config = { extra = { mult = -20, x_mult = 1.2 } },  --variables used for abilities and effects.
+        pos = { x = 0, y = 0 },                         --pos in spirtesheet 0,0 for single sprites or the first sprite in the spritesheet
+        rarity = 2,                                     --rarity 1=common, 2=uncommen, 3=rare, 4=legendary
+        cost = 6,                                       --cost to buy the joker in shops
+        blueprint_compat = false,                        --doses joker work with blueprint
+        eternal_compat = true,                          --can joker be eternal
+        unlocked = true,                                --joker is unlocked by default
+        discovered = true,                              --joker is discovered dby default
+        atlas = nil,                                    --defines the atlas that you want to use for the sprite sheet. atlas=nil if you want to use single sprites
+        soul_pos = nil,                                 --pos of a soul sprite.
+
+        calculate = function(self, context)             --define calculate functions here
+            if context.end_of_round and not context.individual and not context.repetition and not context.blueprint then
+                G.GAME.dollars = 14
+                return {
+                    message = localize { "Reset" }
+                }
+            end
+        end,
+
+        loc_def = function(self) --defines variables to use in the UI. you can use #1# for example to show the mult variable, and #2# for x_mult
+            return { self.ability.extra.mult, self.ability.extra.x_mult }
         end
     }
 }
