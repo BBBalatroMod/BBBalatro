@@ -526,6 +526,9 @@ local jokers = {
         soul_pos = nil,                                 --pos of a soul sprite.
 
         calculate = function(self, context)             --define calculate functions here
+            if self.ability.extra.chips == nil then
+                self.ability.extra.chips = 0
+            end
             if SMODS.end_calculate_context(context) then
                 self.ability.extra.chips = hand_chips
                 return {
