@@ -8,6 +8,7 @@ Non-obligatory Credits (I used your code as a basis to learn more) -
 Firch for making Bunco,
 Mika for making Mikas mod collection,
 Lyman for making Jank Jonklers,
+notmario for making morefluff,
 Blizzow for making Steamodded templates (you are the reason this whole mod exists!).
 
 Special Credits (people who helped with jokers and coding) -
@@ -20,6 +21,7 @@ GayCoonie for coming up with joker ideas and helping me set up a github page (th
 
 Testing Credits (people who are reporting / reported bugs in the code) -
 GayCoonie (again),
+SMD_0 (again),
 humplydinkle.
 
 Emotional support Credits (everyone else who followed my journey of coding) -
