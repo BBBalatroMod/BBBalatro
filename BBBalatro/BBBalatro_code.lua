@@ -528,7 +528,7 @@ local jokers = {
             if SMODS.end_calculate_context(context) then
                 self.ability.extra.chips = hand_chips or 0
                 return {
-                    chip_mod = (self.ability.extra.chips*self.ability.extra.chips - hand_chips) or 0,
+                    chip_mod = (self.ability.extra.chips*self.ability.extra.chips - (hand_chips or 0)) or 0,
                     card = self,
                     message = localize { type = 'variable', key = 'a_chips_minus', vars = { (self.ability.extra.chips*self.ability.extra.chips) or 0 } }
                 }
