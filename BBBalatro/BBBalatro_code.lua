@@ -65,7 +65,7 @@ local jokers = {
         soul_pos = nil,                            --pos of a soul sprite.
 
         calculate = function(self, context)        --define calculate functions here
-            if context.individual and context.cardarea == G.play then
+            if context.individual and context.cardarea == G.play and not context.blueprint then
                 if context.other_card:get_id() == 11 or context.other_card:get_id() == 13 or next(find_joker("Pareidolia")) then
                     local suit_prefix = string.sub(context.other_card.base.suit, 1, 1) .. '_'
                     context.other_card:set_base(G.P_CARDS[suit_prefix .. 'Q'])
@@ -248,7 +248,7 @@ local jokers = {
         soul_pos = nil,                                 --pos of a soul sprite.
 
         calculate = function(self, context)             --define calculate functions here
-            if context.setting_blind and not self.getting_sliced then
+            if context.setting_blind and not self.getting_sliced and not context.blueprint then
                 self.ability.extra.mult = self.ability.extra.mult + G.GAME.round_resets.ante
             end
             if SMODS.end_calculate_context(context) then
@@ -283,7 +283,7 @@ local jokers = {
         soul_pos = nil,                                 --pos of a soul sprite.
 
         calculate = function(self, context)             --define calculate functions here
-            if context.setting_blind and not self.getting_sliced then
+            if context.setting_blind and not self.getting_sliced and not context.blueprint then
                 G.E_MANAGER:add_event(Event({trigger = 'after',delay = 0.1,func = function()
                     G.GAME.blind.chips = math.floor(G.GAME.blind.chips * 0.75)
                     G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
@@ -346,7 +346,7 @@ local jokers = {
         pos = { x = 0, y = 0 },                         --pos in spirtesheet 0,0 for single sprites or the first sprite in the spritesheet
         rarity = 2,                                     --rarity 1=common, 2=uncommen, 3=rare, 4=legendary
         cost = 6,                                       --cost to buy the joker in shops
-        blueprint_compat = false,                        --doses joker work with blueprint
+        blueprint_compat = true,                        --doses joker work with blueprint
         eternal_compat = true,                          --can joker be eternal
         unlocked = true,                                --joker is unlocked by default
         discovered = true,                              --joker is discovered by default
@@ -389,7 +389,7 @@ local jokers = {
             if self.ability.extra.flip == nil then
                 self.ability.extra.flip = 1
             end
-            if context.individual and context.cardarea == G.play then
+            if context.individual and context.cardarea == G.play and not context.blueprint then
                 if next(context.poker_hands["Pair"]) or next(context.poker_hands["Four Of A Kind"]) or next(context.poker_hands["Two Pair"]) then
                     local suit_prefix = string.sub(context.other_card.base.suit, 1, 1) .. '_'
                     local rank_prefix = context.other_card:get_id() + self.ability.extra.flip
@@ -455,7 +455,7 @@ local jokers = {
             if self.ability.card_tally == nil then
                 self.ability.card_tally = 0
             end
-            if context.discard and context.other_card == context.full_hand[#context.full_hand] then --Example calculate: If not debuffed cards are discarded, gain 1$ for every card
+            if context.discard and context.other_card == context.full_hand[#context.full_hand] and not context.blueprint then --Example calculate: If not debuffed cards are discarded, gain 1$ for every card
                 for k, v in ipairs(context.full_hand) do
                     self.ability.extra.card_tally = self.ability.extra.card_tally + 1
                 end
@@ -476,7 +476,7 @@ local jokers = {
         text = {
             "gains {X:red,C:white}+X0.2{} mult every played hand",               --description text.	
             "{C:money}-3${} every played hand", --you can add as many lines as you want
-            "{C:inactive}(currently gives X#2# mult){}",
+            "{C:inactive}(currently gives {}{X:red,C:white}X#2#{}{C:inactive} mult){}",
             "{C:inactive}(jonkler){}"                   --more than 5 lines look odd
         },
         config = { extra = { mult = 0, x_mult = 1.2 } },  --variables used for abilities and effects.
@@ -551,7 +551,7 @@ local jokers = {
         pos = { x = 0, y = 0 },                         --pos in spirtesheet 0,0 for single sprites or the first sprite in the spritesheet
         rarity = 2,                                     --rarity 1=common, 2=uncommen, 3=rare, 4=legendary
         cost = 5,                                       --cost to buy the joker in shops
-        blueprint_compat = false,                        --doses joker work with blueprint
+        blueprint_compat = true,                        --doses joker work with blueprint
         eternal_compat = true,                          --can joker be eternal
         unlocked = true,                                --joker is unlocked by default
         discovered = true,                              --joker is discovered by default
@@ -828,7 +828,7 @@ local jokers = {
         },
         config = { extra = { mult = 0, x_mult = 1.2 } },  --variables used for abilities and effects.
         pos = { x = 0, y = 0 },                         --pos in spirtesheet 0,0 for single sprites or the first sprite in the spritesheet
-        rarity = 1,                                     --rarity 1=common, 2=uncommen, 3=rare, 4=legendary
+        rarity = 2,                                     --rarity 1=common, 2=uncommen, 3=rare, 4=legendary
         cost = 5,                                       --cost to buy the joker in shops
         blueprint_compat = true,                        --doses joker work with blueprint
         eternal_compat = true,                          --can joker be eternal
@@ -838,7 +838,7 @@ local jokers = {
         soul_pos = nil,                                 --pos of a soul sprite.
 
         calculate = function(self, context)             --define calculate functions here
-            if context.individual and context.cardarea == G.play then
+            if context.individual and context.cardarea == G.play and not context.blueprint then
                 if context.other_card:get_id() == 14 then
                     self.ability.extra.mult = self.ability.extra.mult + 2
                 end
@@ -1160,7 +1160,7 @@ local jokers = {
         name = "Cap'n J-Beard",                                --name used by the joker
         text = {
             "{X:red,C:white}+X0.2{} mult per each {C:attention}joker{}",
-            "{C:inactive}(currently gives X#2# mult){}",
+            "{C:inactive}(currently gives {}{X:red,C:white}X#2#{}{C:inactive} mult){}",
             "{C:inactive}(jonkler){}"                   --more than 5 lines look odd
         },
         config = { extra = { mult = 0, x_mult = 1 } },  --variables used for abilities and effects.
