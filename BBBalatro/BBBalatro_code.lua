@@ -322,6 +322,9 @@ local jokers = {
         soul_pos = nil,                                 --pos of a soul sprite.
 
         calculate = function(self, context)             --define calculate functions here
+            if self.ability.extra.mult == nil then
+                self.ability.extra.mult = 0
+            end
             if SMODS.end_calculate_context(context) then
                 self.ability.extra.mult = (self.ability.extra.mult + 5) or 0
                 return {
