@@ -8,3 +8,4 @@ BBBalatro versions :
 1.0.1 - Joker fixing,
 1.1.0 - the Desert Seas update,
 1.1.1 - Description & Blueprint fixing.
+1.1.2 - Deaf joker fixed
