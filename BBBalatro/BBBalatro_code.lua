@@ -812,8 +812,8 @@ local jokers = {
                             return true
                         end)}))
                     card_eval_status_text(self, 'extra', nil, nil, nil, {message = "SUN", colour = G.C.PURPLE})
-                    self.ability.extra.card_tally = 0
                 end
+                self.ability.extra.card_tally = 0
             end
         end,
 
