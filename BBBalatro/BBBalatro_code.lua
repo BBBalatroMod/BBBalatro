@@ -795,7 +795,7 @@ local jokers = {
         soul_pos = nil,                                 --pos of a soul sprite.
 
         calculate = function(self, context)             --define calculate functions here
-            if context.individual and context.cardarea == G.play and G.GAME.current_round.hands_played == 0 then
+            if context.individual and context.cardarea == G.play and G.GAME.current_round.hands_played == 0 and not context.blueprint then
                 for k, v in ipairs(context.full_hand) do
                     if v.base.suit == 'Hearts' then self.ability.extra.card_tally = self.ability.extra.card_tally + 1 end
                 end
@@ -879,6 +879,9 @@ local jokers = {
         soul_pos = nil,                                 --pos of a soul sprite.
 
         calculate = function(self, context)             --define calculate functions here
+            if self.ability.extra.mult == nil then
+                self.ability.extra.mult = 0
+            end
             if self.ability.extra.mult <= 0 then
                 play_sound('tarot1')
                 self.T.r = -0.2
@@ -890,7 +893,7 @@ local jokers = {
                 self = nil
             end
             if context.individual and context.cardarea == G.play then
-                self.ability.extra.mult = self.ability.extra.mult - 1
+                self.ability.extra.mult = (self.ability.extra.mult - 1)
             end
             if SMODS.end_calculate_context(context) then
                 return {
