@@ -336,6 +336,10 @@ local jokers = {
                 self.ability.extra.mult = 5
             end
         end,
+
+        loc_def = function(self) --defines variables to use in the UI. you can use #1# for example to show the mult variable, and #2# for x_mult
+            return { self.ability.extra.mult, self.ability.extra.xmult }
+        end,
     },
 
     diamondskyjoker = {                                     --slug used by the joker.
