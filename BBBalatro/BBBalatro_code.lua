@@ -41,7 +41,7 @@ SMODS.Joker {
     eternal_compat = true,                              --can joker be eternal
     soul_pos = nil,                            --pos of a soul sprite.
 
-    calculate = function(self, context)                 --define calculate functions here
+    calculate = function(self, context, card)                 --define calculate functions here
         if context.individual and context.cardarea == G.play then
             if context.other_card.ability.effect ~= 'Mult Card' and context.other_card.ability.effect ~= 'Bonus Card' and context.other_card.ability.effect ~= 'Wild Card' and context.other_card.ability.effect ~= 'Glass Card' and context.other_card.ability.effect ~= 'Steel Card' and context.other_card.ability.effect ~= 'Gold Card' and context.other_card.ability.effect ~= 'Lucky Card' and context.other_card.ability.effect ~= 'Stone Card' then
                 return {
@@ -81,7 +81,7 @@ SMODS.Joker {
     atlas = 'jokersheet',                               --defines the atlas that you want to use for the sprite sheet. atlas=nil if you want to use single sprites
     soul_pos = nil,                            --pos of a soul sprite.
 
-    calculate = function(self, context)        --define calculate functions here
+    calculate = function(self, context, card)        --define calculate functions here
         if context.individual and context.cardarea == G.play and not context.blueprint then
             if context.other_card:get_id() == 11 or context.other_card:get_id() == 13 or next(find_joker("Pareidolia")) then
                 local suit_prefix = string.sub(context.other_card.base.suit, 1, 1) .. '_'
@@ -119,7 +119,7 @@ SMODS.Joker {
     atlas = 'jokersheet',                                    --defines the atlas that you want to use for the sprite sheet. atlas=nil if you want to use single sprites
     soul_pos = nil,                                 --pos of a soul sprite.
 
-    calculate = function(self, context)             --define calculate functions here
+    calculate = function(self, context, card)             --define calculate functions here
         if SMODS.end_calculate_context(context) then
             if G.GAME.dollars <= 0 then
                 return {
@@ -157,7 +157,7 @@ SMODS.Joker {
     atlas = 'jokersheet',                                    --defines the atlas that you want to use for the sprite sheet. atlas=nil if you want to use single sprites
     soul_pos = nil,                                 --pos of a soul sprite.
 
-    calculate = function(self, context)             --define calculate functions here
+    calculate = function(self, context, card)             --define calculate functions here
         if context.individual and context.cardarea == G.play then
             if context.other_card.base.suit == ("Hearts") and context.other_card.ability.effect ~= 'Stone Card' then
                 if context.other_card:get_id() == 2 or context.other_card:get_id() == 3 or context.other_card:get_id() == 8 or context.other_card:get_id() == 10 then
@@ -205,7 +205,7 @@ SMODS.Joker {
     atlas = 'jokersheet',                                    --defines the atlas that you want to use for the sprite sheet. atlas=nil if you want to use single sprites
     soul_pos = nil,                                 --pos of a soul sprite.
 
-    calculate = function(self, context)             --define calculate functions here   
+    calculate = function(self, context, card)             --define calculate functions here   
         if SMODS.end_calculate_context(context) then
             return {
                 Xmult_mod = pseudorandom('strokejoker', 0.5, 2)*0.1,
@@ -240,7 +240,7 @@ SMODS.Joker {
     atlas = 'jokersheet',                                    --defines the atlas that you want to use for the sprite sheet. atlas=nil if you want to use single sprites
     soul_pos = nil,                                 --pos of a soul sprite.
 
-    calculate = function(self, context)             --define calculate functions here   
+    calculate = function(self, context, card)             --define calculate functions here   
         if context.individual and context.cardarea == G.play then
             if context.other_card:get_id() == 10 then
                 if pseudorandom('binaryjoker') < G.GAME.probabilities.normal/2 then
@@ -279,7 +279,7 @@ SMODS.Joker {
     atlas = 'jokersheet',                                    --defines the atlas that you want to use for the sprite sheet. atlas=nil if you want to use single sprites
     soul_pos = nil,                                 --pos of a soul sprite.
 
-    calculate = function(self, context)             --define calculate functions here
+    calculate = function(self, context, card)             --define calculate functions here
         if context.setting_blind and not self.getting_sliced and not context.blueprint then
             card.ability.extra.mult = card.ability.extra.mult + G.GAME.round_resets.ante
         end
@@ -317,7 +317,7 @@ SMODS.Joker {
     atlas = 'jokersheet',                                    --defines the atlas that you want to use for the sprite sheet. atlas=nil if you want to use single sprites
     soul_pos = nil,                                 --pos of a soul sprite.
 
-    calculate = function(self, context)             --define calculate functions here
+    calculate = function(self, context, card)             --define calculate functions here
         if context.setting_blind and not self.getting_sliced and not context.blueprint then
             G.E_MANAGER:add_event(Event({trigger = 'after',delay = 0.1,func = function()
                 G.GAME.blind.chips = math.floor(G.GAME.blind.chips * 0.75)
@@ -359,7 +359,7 @@ SMODS.Joker {
     atlas = 'jokersheet',                                    --defines the atlas that you want to use for the sprite sheet. atlas=nil if you want to use single sprites
     soul_pos = nil,                                 --pos of a soul sprite.
 
-    calculate = function(self, context)             --define calculate functions here
+    calculate = function(self, context, card)             --define calculate functions here
         if card.ability.extra.mult == nil then
             card.ability.extra.mult = 0
         end
@@ -401,7 +401,7 @@ SMODS.Joker {
     atlas = 'jokersheet',                                    --defines the atlas that you want to use for the sprite sheet. atlas=nil if you want to use single sprites
     soul_pos = nil,                                 --pos of a soul sprite.
 
-    calculate = function(self, context)             --define calculate functions here
+    calculate = function(self, context, card)             --define calculate functions here
         if context.individual and context.cardarea == G.hand then
             if context.other_card.base.suit == 'Diamonds' then
                 ease_dollars(1)
@@ -436,7 +436,7 @@ SMODS.Joker {
     atlas = 'jokersheet',                                    --defines the atlas that you want to use for the sprite sheet. atlas=nil if you want to use single sprites
     soul_pos = nil,                                 --pos of a soul sprite.
 
-    calculate = function(self, context)             --define calculate functions here
+    calculate = function(self, context, card)             --define calculate functions here
         local flip
         if flip == nil then
             flip = 1
@@ -549,7 +549,7 @@ SMODS.Joker {
     atlas = 'jokersheet',                                    --defines the atlas that you want to use for the sprite sheet. atlas=nil if you want to use single sprites
     soul_pos = nil,                                 --pos of a soul sprite.
 
-    calculate = function(self, context)             --define calculate functions here
+    calculate = function(self, context, card)             --define calculate functions here
         if SMODS.end_calculate_context(context) then
             ease_dollars(-3)
             card.ability.extra.x_mult = card.ability.extra.x_mult + 0.2
@@ -586,7 +586,7 @@ SMODS.Joker {
     atlas = 'jokersheet',                                    --defines the atlas that you want to use for the sprite sheet. atlas=nil if you want to use single sprites
     soul_pos = nil,                                 --pos of a soul sprite.
 
-    calculate = function(self, context)             --define calculate functions here
+    calculate = function(self, context, card)             --define calculate functions here
         if SMODS.end_calculate_context(context) then
             card.ability.extra.chips = hand_chips or 0
             return {
@@ -623,7 +623,7 @@ SMODS.Joker {
     atlas = 'jokersheet',                                    --defines the atlas that you want to use for the sprite sheet. atlas=nil if you want to use single sprites
     soul_pos = nil,                                 --pos of a soul sprite.
 
-    calculate = function(self, context)             --define calculate functions here
+    calculate = function(self, context, card)             --define calculate functions here
         local card_tally = 0
         if context.individual and context.cardarea == G.play then
             for k, v in ipairs(context.full_hand) do
@@ -726,7 +726,7 @@ SMODS.Joker {
     atlas = 'jokersheet',                                    --defines the atlas that you want to use for the sprite sheet. atlas=nil if you want to use single sprites
     soul_pos = nil,                                 --pos of a soul sprite.
 
-    calculate = function(self, context)             --define calculate functions here
+    calculate = function(self, context, card)             --define calculate functions here
         if SMODS.end_calculate_context(context) then
             return {
                 mult_mod = hand_chips,
@@ -762,7 +762,7 @@ SMODS.Joker {
     atlas = 'jokersheet',                                    --defines the atlas that you want to use for the sprite sheet. atlas=nil if you want to use single sprites
     soul_pos = nil,                                 --pos of a soul sprite.
 
-    calculate = function(self, context)             --define calculate functions here
+    calculate = function(self, context, card)             --define calculate functions here
         if SMODS.end_calculate_context(context) then
             card.ability.extra.mult = card.ability.extra.mult + 4
             return {
@@ -798,14 +798,14 @@ SMODS.Joker {
     atlas = 'jokersheet',                                    --defines the atlas that you want to use for the sprite sheet. atlas=nil if you want to use single sprites
     soul_pos = nil,                                 --pos of a soul sprite.
 
-    calculate = function(self, context)             --define calculate functions here
+    calculate = function(self, context, card)             --define calculate functions here
         if context.repetition then
              if context.cardarea == G.play then
                 if context.other_card.ability.effect == "Stone Card" then
                     return {
                         message = localize('k_again_ex'),
                         repetitions = 1,
-                        card = self
+                        card = card
                     }
                 end
             end
@@ -837,7 +837,7 @@ SMODS.Joker {
     atlas = 'jokersheet',                                    --defines the atlas that you want to use for the sprite sheet. atlas=nil if you want to use single sprites
     soul_pos = nil,                                 --pos of a soul sprite.
 
-    calculate = function(self, context)             --define calculate functions here
+    calculate = function(self, context, card)             --define calculate functions here
         if context.end_of_round and not context.individual and not context.repetition and not context.blueprint then
             G.GAME.dollars = 14
             return {
@@ -872,7 +872,7 @@ SMODS.Joker {
     atlas = 'jokersheet',                                    --defines the atlas that you want to use for the sprite sheet. atlas=nil if you want to use single sprites
     soul_pos = nil,                                 --pos of a soul sprite.
 
-    calculate = function(self, context)             --define calculate functions here
+    calculate = function(self, context, card)             --define calculate functions here
         local card_tally = 0
         if context.individual and context.cardarea == G.play and G.GAME.current_round.hands_played == 0 and not context.blueprint then
             for k, v in ipairs(context.full_hand) do
@@ -922,7 +922,7 @@ SMODS.Joker {
     atlas = 'jokersheet',                                    --defines the atlas that you want to use for the sprite sheet. atlas=nil if you want to use single sprites
     soul_pos = nil,                                 --pos of a soul sprite.
 
-    calculate = function(self, context)             --define calculate functions here
+    calculate = function(self, context, card)             --define calculate functions here
         if context.individual and context.cardarea == G.play and not context.blueprint then
             if context.other_card:get_id() == 14 then
                 card.ability.extra.mult = card.ability.extra.mult + 2
@@ -963,7 +963,7 @@ SMODS.Joker {
     atlas = 'jokersheet',                                    --defines the atlas that you want to use for the sprite sheet. atlas=nil if you want to use single sprites
     soul_pos = nil,                                 --pos of a soul sprite.
 
-    calculate = function(self, context)             --define calculate functions here
+    calculate = function(self, context, card)             --define calculate functions here
         if card.ability.extra.mult == nil then
             card.ability.extra.mult = 0
         end
@@ -1055,7 +1055,7 @@ SMODS.Joker {
     atlas = 'jokersheet',                                    --defines the atlas that you want to use for the sprite sheet. atlas=nil if you want to use single sprites
     soul_pos = nil,                                 --pos of a soul sprite.
 
-    calculate = function(self, context)             --define calculate functions here
+    calculate = function(self, context, card)             --define calculate functions here
         local card_tally = 0
         local scored_tally = 0
         if context.individual and context.cardarea == G.play then
@@ -1102,7 +1102,7 @@ SMODS.Joker {
     atlas = 'jokersheet',                                    --defines the atlas that you want to use for the sprite sheet. atlas=nil if you want to use single sprites
     soul_pos = nil,                                 --pos of a soul sprite.
 
-    calculate = function(self, context)             --define calculate functions here
+    calculate = function(self, context, card)             --define calculate functions here
         local swap
         if swap == nil then
             swap = 0
@@ -1151,7 +1151,7 @@ SMODS.Joker {
     atlas = 'jokersheet',                                    --defines the atlas that you want to use for the sprite sheet. atlas=nil if you want to use single sprites
     soul_pos = nil,                                 --pos of a soul sprite.
 
-    calculate = function(self, context)             --define calculate functions here
+    calculate = function(self, context, card)             --define calculate functions here
         if SMODS.end_calculate_context(context) and G.GAME.current_round.hands_played == 0 then
             return{
                 Xmult_mod = card.ability.extra.x_mult,
@@ -1186,7 +1186,7 @@ SMODS.Joker {
     atlas = 'jokersheet',                                    --defines the atlas that you want to use for the sprite sheet. atlas=nil if you want to use single sprites
     soul_pos = nil,                                 --pos of a soul sprite.
 
-    calculate = function(self, context)             --define calculate functions here
+    calculate = function(self, context, card)             --define calculate functions here
 
     end,
 
@@ -1260,7 +1260,7 @@ SMODS.Joker {
     atlas = 'jokersheet',                                    --defines the atlas that you want to use for the sprite sheet. atlas=nil if you want to use single sprites
     soul_pos = nil,                                 --pos of a soul sprite.
 
-    calculate = function(self, context)             --define calculate functions here
+    calculate = function(self, context, card)             --define calculate functions here
         card.ability.extra.mult = math.floor(#G.deck.cards / 5)
         if SMODS.end_calculate_context(context) then
             return{
@@ -1297,7 +1297,7 @@ SMODS.Joker {
     atlas = 'jokersheet',                                    --defines the atlas that you want to use for the sprite sheet. atlas=nil if you want to use single sprites
     soul_pos = nil,                                 --pos of a soul sprite.
 
-    calculate = function(self, context)             --define calculate functions here
+    calculate = function(self, context, card)             --define calculate functions here
         card.ability.extra.x_mult = 1
         for i = 1, #G.jokers.cards do
             if G.jokers.cards[i].ability.set == 'Joker' then card.ability.extra.x_mult = card.ability.extra.x_mult + 0.2 end
