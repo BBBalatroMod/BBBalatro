@@ -13,3 +13,4 @@ A fun little mod that is trying to add a bunch of jokers to balatro, for fun! Th
 ### 1.1.3 - Sun and Mummy jokers fixed,
 ### 1.1.4 - Deaf joker fixed (for reals this time).
 ### 1.2.0 - THE MIGRATION
+### 1.2.1 - Joker calculations fix
