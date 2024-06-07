@@ -587,16 +587,13 @@ SMODS.Joker {
     soul_pos = nil,                                 --pos of a soul sprite.
 
     calculate = function(self, context, card)             --define calculate functions here
-        if hand_chips == nil then
-            card.ability.extra.chips = 0
-        else
-            card.ability.extra.chips = hand_chips
-        end
+        local chipvalue
         if SMODS.end_calculate_context(context) then
+            chipvalue = hand_chips or 0
             return {
-                chip_mod = (card.ability.extra.chips*card.ability.extra.chips - (card.ability.extra.chips)) or 0,
+                chip_mod = (chipvalue*chipvalue - (chipvalue)) or 0,
                 card = card,
-                message = localize { type = 'variable', key = 'a_chips_minus', vars = { (card.ability.extra.chips*card.ability.extra.chips) or 0 } }
+                message = localize { type = 'variable', key = 'a_chips_minus', vars = { (chipvalue*chipvalue) or 0 } }
             }
         end
     end,
