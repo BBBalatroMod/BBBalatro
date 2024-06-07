@@ -571,7 +571,7 @@ SMODS.Joker {
     loc_txt = {
         name = "Actually square joker",                                --name used by the joker
         text = {
-            "Multiplies {C:chips}chips{} by itself",               --description text.	
+            "Multiplies {C:chips}chips{} by itself on the {C:attention}first hand{}",               --description text.	
             "{C:inactive}(jonkler){}"                   --more than 5 lines look odd
         }
     },
@@ -587,8 +587,18 @@ SMODS.Joker {
     soul_pos = nil,                                 --pos of a soul sprite.
 
     calculate = function(self, context, card)             --define calculate functions here
+        local squared
+        if squared == nil then
+            squared = 0
+        end
         if SMODS.end_calculate_context(context) then
-            hand_chips = hand_chips*hand_chips
+            if squared == 0 then
+                hand_chips = hand_chips*hand_chips
+                squared = 1
+            end
+        end
+        if context.end_of_round and not context.individual and not context.repetition and not context.blueprint then
+            squared = 0
         end
     end,
 
