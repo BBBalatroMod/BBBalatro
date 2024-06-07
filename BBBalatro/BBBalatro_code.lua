@@ -591,9 +591,13 @@ SMODS.Joker {
         if squared == nil then
             squared = 0
         end
+        local chipvalue = hand_chips
         if SMODS.end_calculate_context(context) then
+            if squared == 1 then
+                chipvalue = 1
+            end
             if squared == 0 then
-                hand_chips = hand_chips*hand_chips
+                hand_chips = hand_chips*chipvalue
                 squared = 1
             end
         end
