@@ -591,7 +591,7 @@ SMODS.Joker {
             return {
                 chip_mod = hand_chips*hand_chips-hand_chips,
                 card = self,
-                message = localize { type = 'variable', key = 'a_chips_minus', vars = { hand_chips*hand_chips } }
+                message = localize { type = 'variable', key = 'a_chips', vars = { hand_chips*hand_chips } }
             }
         end
     end,
@@ -730,7 +730,7 @@ SMODS.Joker {
             return {
                 mult_mod = hand_chips,
                 card = self,
-                message = localize { type = 'variable', key = 'a_chips_minus', vars = { hand_chips } }
+                message = localize { type = 'variable', key = 'a_mult', vars = { hand_chips } }
             }
         end
     end,
