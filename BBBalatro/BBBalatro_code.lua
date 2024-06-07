@@ -575,7 +575,7 @@ SMODS.Joker {
             "{C:inactive}(jonkler){}"                   --more than 5 lines look odd
         }
     },
-    config = { extra = { mult = 0, x_mult = 1.2 } },  --variables used for abilities and effects.
+    config = { extra = { mult = 0, x_mult = 1.2, chips = 0 } },  --variables used for abilities and effects.
     pos = { x = 13, y = 0 },                         --pos in spirtesheet 0,0 for single sprites or the first sprite in the spritesheet
     rarity = 3,                                     --rarity 1=common, 2=uncommen, 3=rare, 4=legendary
     cost = 16,                                       --cost to buy the joker in shops
@@ -587,10 +587,14 @@ SMODS.Joker {
     soul_pos = nil,                                 --pos of a soul sprite.
 
     calculate = function(self, context, card)             --define calculate functions here
+        if hand_chips == nil then
+            card.ability.extra.chips = 0
+        else
+            card.ability.extra.chips = hand_chips
+        end
         if SMODS.end_calculate_context(context) then
-            card.ability.extra.chips = hand_chips or 0
             return {
-                chip_mod = (card.ability.extra.chips*card.ability.extra.chips - (hand_chips or 0)) or 0,
+                chip_mod = (card.ability.extra.chips*card.ability.extra.chips - (card.ability.extra.chips)) or 0,
                 card = card,
                 message = localize { type = 'variable', key = 'a_chips_minus', vars = { (card.ability.extra.chips*card.ability.extra.chips) or 0 } }
             }
