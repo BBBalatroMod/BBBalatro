@@ -1215,21 +1215,21 @@ SMODS.Joker {
     discovered = true,                              --joker is discovered dby default
     atlas = 'jokersheet',                                    --defines the atlas that you want to use for the sprite sheet. atlas=nil if you want to use single sprites
     soul_pos = nil,                                 --pos of a soul sprite.
+    scored_tally = 0,                               -- Initialize scored_tally as a property of the Joker
 
     calculate = function(self,card, context)             --define calculate functions here
-        local scored_tally = 0
         if context.repetition then
             if context.cardarea == G.play then
-                scored_tally = scored_tally + 1
+                self.scored_tally = self.scored_tally + 1
                 return {
                     message = localize('k_again_ex'),
-                    repetitions = scored_tally,
+                    repetitions = self.scored_tally,
                     card = card
                 }
             end
         end
         if SMODS.end_calculate_context(context) then
-            scored_tally = 0
+            self.scored_tally = 0
         end
     end,
 
