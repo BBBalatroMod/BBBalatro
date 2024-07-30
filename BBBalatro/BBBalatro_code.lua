@@ -698,8 +698,10 @@ local jokers = {
         soul_pos = nil,                                 --pos of a soul sprite.
 
         calculate = function(self, context)             --define calculate functions here
-            if SMODS.end_calculate_context(context) then
+            if context.discard and context.other_card == context.full_hand[#context.full_hand] and not context.blueprint then
                 self.ability.extra.mult = self.ability.extra.mult + self.ability.extra.multadd
+            end
+            if SMODS.end_calculate_context(context) then
                 return {
                     mult_mod = self.ability.extra.mult-self.ability.extra.multadd,
                     card = self,
