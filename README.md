@@ -31,3 +31,4 @@ added compatability with jokers / editions that change joker values <br>
 updated yellow joker sprite <br>
 nerfed the sun to make it destroy the played card <br>
 fixed island joker only triggering cards once <br>
+changed sand joker to use discard instead of hands and add 2 mult instead of 4
