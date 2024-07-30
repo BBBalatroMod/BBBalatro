@@ -1027,7 +1027,7 @@ local jokers = {
                     return {
                         chip_mod = self.ability.extra.chips,
                         card = self,
-                        message = localize { type = 'variable', key = 'a_mult', vars = { self.ability.extra.chips } }
+                        message = localize { type = 'variable', key = 'a_chips', vars = { self.ability.extra.chips } }
                     }
                 end
             end
