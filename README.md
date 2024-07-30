@@ -26,8 +26,8 @@ i have no clue what i meant by this
 ### 1.2.2 - Square joker nerf + fix
 i dont think i really nerfed the square joker
 ### 1.3.0 - The Comeback
-from here the balatro versions will go into greater detail about stuff.
-added compatability with jokers / editions that change joker values
-updated yellow joker sprite
-nerfed the sun to make it destroy the played card
-fixed island joker only triggering cards once
+from here the balatro versions will go into greater detail about stuff. <br>
+added compatability with jokers / editions that change joker values <br>
+updated yellow joker sprite <br>
+nerfed the sun to make it destroy the played card <br>
+fixed island joker only triggering cards once <br>
