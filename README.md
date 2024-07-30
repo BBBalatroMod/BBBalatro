@@ -32,3 +32,5 @@ updated yellow joker sprite <br>
 nerfed the sun to make it destroy the played card <br>
 fixed island joker only triggering cards once <br>
 changed sand joker to use discard instead of hands and add 2 mult instead of 4
+### 1.3.1 - 'Small' Mistake
+fixed jokers appearing small because i accidentally put the 1x images in 2x
