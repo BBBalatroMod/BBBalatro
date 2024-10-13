@@ -67,7 +67,7 @@ local jokers = {
         calculate = function(self, context)        --define calculate functions here
             if context.individual and context.cardarea == G.play and not context.blueprint then
                 if context.other_card:get_id() == 11 or context.other_card:get_id() == 13 or next(find_joker("Pareidolia")) then
-                    local suit_prefix = string.sub(context.other_card.base.suit, 1, 1) .. '_'
+                    local suit_prefix = SMODS.Suits[context.other_card.base.suit].card_key .. '_'
                     context.other_card:set_base(G.P_CARDS[suit_prefix .. 'Q'])
                     return {
                         message = localize { "Wokified" }
@@ -398,7 +398,7 @@ local jokers = {
             end
             if context.individual and context.cardarea == G.play and not context.blueprint then
                 if next(context.poker_hands["Pair"]) or next(context.poker_hands["Four Of A Kind"]) or next(context.poker_hands["Two Pair"]) then
-                    local suit_prefix = string.sub(context.other_card.base.suit, 1, 1) .. '_'
+                    local suit_prefix = SMODS.Suits[context.other_card.base.suit].card_key .. '_'
                     local rank_prefix = context.other_card:get_id() + self.ability.extra.flip
                     if rank_prefix > 10 then
                         if rank_prefix > 11 then
