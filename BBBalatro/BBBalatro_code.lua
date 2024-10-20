@@ -67,7 +67,7 @@ local jokers = {
         calculate = function(self, context)        --define calculate functions here
             if context.individual and context.cardarea == G.play and not context.blueprint then
                 if context.other_card:get_id() == 11 or context.other_card:get_id() == 13 or next(find_joker("Pareidolia")) then
-                    local suit_prefix = string.sub(context.other_card.base.suit, 1, 1) .. '_'
+                    local suit_prefix = SMODS.Suits[context.other_card.base.suit].card_key .. '_'
                     context.other_card:set_base(G.P_CARDS[suit_prefix .. 'Q'])
                     return {
                         message = localize { "Wokified" }
@@ -398,7 +398,7 @@ local jokers = {
             end
             if context.individual and context.cardarea == G.play and not context.blueprint then
                 if next(context.poker_hands["Pair"]) or next(context.poker_hands["Four Of A Kind"]) or next(context.poker_hands["Two Pair"]) then
-                    local suit_prefix = string.sub(context.other_card.base.suit, 1, 1) .. '_'
+                    local suit_prefix = SMODS.Suits[context.other_card.base.suit].card_key .. '_'
                     local rank_prefix = context.other_card:get_id() + self.ability.extra.flip
                     if rank_prefix > 10 then
                         if rank_prefix > 11 then
@@ -504,7 +504,7 @@ local jokers = {
                 return {
                     Xmult_mod = self.ability.extra.x_mult-self.ability.extra.xmultadd,
                     card = self,
-                    message = localize { type = 'variable', key = 'a_xmult', vars = { self.ability.extra.x_mult-self,ability.extra.xmultadd } }
+                    message = localize { type = 'variable', key = 'a_xmult', vars = { self.ability.extra.x_mult-self.ability.extra.xmultadd } }
                 }
             end
         end,
@@ -682,11 +682,11 @@ local jokers = {
     sandjoker = {                                     --slug used by the joker.
         name = "Hot sand",                                --name used by the joker
         text = {
-            "gains {C:mult}#3# mult{} every {C:blue}hand{} played,",               --description text.	
+            "gains {C:mult}#3# mult{} every {C:red}discard{} played,",               --description text.	
             "{C:inactive}(currently gives #1# mult){}",
             "{C:inactive}(jonkler){}"                   --more than 5 lines look odd
         },
-        config = { extra = { mult = -20, x_mult = 1.2, multadd = 4 } },  --variables used for abilities and effects.
+        config = { extra = { mult = -20, x_mult = 1.2, multadd = 2 } },  --variables used for abilities and effects.
         pos = { x = 0, y = 0 },                         --pos in spirtesheet 0,0 for single sprites or the first sprite in the spritesheet
         rarity = 1,                                     --rarity 1=common, 2=uncommen, 3=rare, 4=legendary
         cost = 1,                                       --cost to buy the joker in shops
@@ -703,9 +703,9 @@ local jokers = {
             end
             if SMODS.end_calculate_context(context) then
                 return {
-                    mult_mod = self.ability.extra.mult-self.ability.extra.multadd,
+                    mult_mod = self.ability.extra.mult,
                     card = self,
-                    message = localize { type = 'variable', key = 'a_mult', vars = { self.ability.extra.mult-self.ability.extra.multadd } }
+                    message = localize { type = 'variable', key = 'a_mult', vars = { self.ability.extra.mult } }
                 }
             end
         end,
