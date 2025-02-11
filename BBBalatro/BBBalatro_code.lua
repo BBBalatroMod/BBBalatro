@@ -537,7 +537,7 @@ local jokers = {
                 return {
                     chip_mod = (self.ability.extra.chips*self.ability.extra.chips - (hand_chips or 0)) or 0,
                     card = self,
-                    message = localize { type = 'variable', key = 'a_chips_minus', vars = { (self.ability.extra.chips*self.ability.extra.chips) or 0 } }
+                    message = localize { type = 'variable', key = 'a_chips', vars = { (self.ability.extra.chips*self.ability.extra.chips) or 0 } }
                 }
             end
         end,
@@ -669,7 +669,7 @@ local jokers = {
                 return {
                     mult_mod = hand_chips,
                     card = self,
-                    message = localize { type = 'variable', key = 'a_chips_minus', vars = { hand_chips } }
+                    message = localize { type = 'variable', key = 'a_chips', vars = { hand_chips } }
                 }
             end
         end,
@@ -1027,7 +1027,7 @@ local jokers = {
                     return {
                         chip_mod = self.ability.extra.chips,
                         card = self,
-                        message = localize { type = 'variable', key = 'a_mult', vars = { self.ability.extra.chips } }
+                        message = localize { type = 'variable', key = 'a_chips', vars = { self.ability.extra.chips } }
                     }
                 end
             end
