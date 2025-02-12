@@ -2,7 +2,7 @@
 A fun little mod that is trying to add a bunch of jokers to balatro, for fun! Thats all you really need to know, read the credits, update steamodded if you need to, tell me about bugs if they appear, and enjoy!
 (migrated to steamodded 1.0.0+)
 
-# current BBBalatro version : 1.2.2
+# current BBBalatro version : 1.3.2
 
 ## BBBalatro versions :
 ### 1.0.0 - the Release
